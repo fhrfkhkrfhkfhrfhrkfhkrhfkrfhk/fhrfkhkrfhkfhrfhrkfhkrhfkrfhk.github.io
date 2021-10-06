@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <title>hunchoWatch</title>
+    <link rel="icon" href="./source/img/gen.png" type="image/x-icon">
+   <link rel="stylesheet" href="https://cdn.popcat.xyz/bootstrap.css">
+   <style>
+      #timer {
+      margin-top: 50vh;
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif
+      }
+      .buttons {
+      display: flex;
+      justify-content: center;
+      }
+      button {
+      margin-left: 5px;
+      }
+   </style>
+   <body>
+      <h1 id="timer">0:00</h1>
+      <div class="buttons">
+         <button class="btn btn-primary btn-lg mx-2"id="start">Start</button>
+         <button class="btn btn-primary btn-lg mx-2"id="stop">Clear</button>
+      </div>
+      <script>
+         const start = document.getElementById("start");
+         const stop = document.getElementById("stop");
+         let time = 0;
+         let Interval;
+         const stopper = () => {
+         clearInterval(Interval)
+         time = 0;
+         document.getElementById("timer").innerHTML = time;
+         }
+         const format = (time) => {   
+           var hrs = ~~(time / 3600);
+           var mins = ~~((time % 3600) / 60);
+           var secs = ~~time % 60;
+           var ret = "";
+           if (hrs > 0) {
+               ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+           }
+           ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+           ret += "" + secs;
+           return ret;
+         }
+         start.addEventListener("click", () => {
+         Interval = setInterval(() => {
+         starter()
+         }, 10)
+         })
+         stop.addEventListener("click", stopper)
+         const starter = async () => {
+         time++;
+         document.getElementById("timer").innerHTML = format(time);
+         }
+         
+      </script>
+   </body>
+</html>
